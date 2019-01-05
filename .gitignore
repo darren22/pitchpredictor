@@ -1,3 +1,9 @@
+# baseball data folder
+data/
+
+
+### Auto-generated below. May need to remove some of these later ###
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
