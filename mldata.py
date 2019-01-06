@@ -28,15 +28,18 @@ class SeasonEncoder(object):
       self._encoded_data[INTEGER_COLUMNS] = self.season_data[INTEGER_COLUMNS]     
       self._encoded_data[BINARY_ID_COLUMNS] = self.season_data[BINARY_ID_COLUMNS] >= 0
       
+      for col in CATEGORICAL_COLUMNS:
+        self.encodings[col] = {val:idx for idx,val in 
+                      enumerate(self.season_data[col].unique())}
+        self._encoded_data[col] = self.season_data[col].replace(
+                      self.encodings[col])
+      
       if self.one_hot:
-        pass
+        for col in ID_COLUMNS + CATEGORICAL_COLUMNS:
+          one_hot = pd.get_dummies(self._encoded_data[col])
+          self._encoded_data = pd.concat((self._encoded_data.drop(col), one_hot), axis=1)
       
       else:
-        for col in CATEGORICAL_COLUMNS:
-          self.encodings[col] = {val:idx for idx,val in 
-                        enumerate(self.season_data[col].unique())}
-          self._encoded_data[col] = self.season_data[col].replace(
-                        self.encodings[col])
           
     return self._encoded_data
   
