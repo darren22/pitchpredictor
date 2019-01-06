@@ -39,7 +39,8 @@ class SeasonEncoder(object):
           one_hot = pd.get_dummies(self._encoded_data[col], prefix='%s_' %col)
           print(col)
           print(self._encoded_data.columns)
-          self._encoded_data = pd.concat((self._encoded_data.drop(col), one_hot), axis=1)
+          self._encoded_data.drop(col, inplace=True)
+          self._encoded_data = pd.concat((self._encoded_data, one_hot), axis=1)
                 
     return self._encoded_data
   
