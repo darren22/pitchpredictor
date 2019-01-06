@@ -38,9 +38,7 @@ class SeasonEncoder(object):
         for col in ID_COLUMNS + CATEGORICAL_COLUMNS:
           one_hot = pd.get_dummies(self._encoded_data[col])
           self._encoded_data = pd.concat((self._encoded_data.drop(col), one_hot), axis=1)
-      
-      else:
-          
+                
     return self._encoded_data
   
   def decode(self, encoded_data):
