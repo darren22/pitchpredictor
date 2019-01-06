@@ -21,7 +21,7 @@ class SeasonEncoder(object):
     
   @property
   def encoded_data(self):
-    if not self._encoded_data:
+    if self._encoded_data is None:
       self._encoded_data = pd.DataFrame()
       
       self._encoded_data[ID_COLUMNS] = self.season_data[ID_COLUMNS]
